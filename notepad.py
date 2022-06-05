@@ -4,11 +4,24 @@
 from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
+from tkinter import colorchooser
+from turtle import title
 
 
-
-
+# =========================== Global Variable=====================
+font_size = 12
+font_color = (colorchooser.askcolor(title = 'Pick a color'))[1]
 # ============================Functions=================
+
+def exit():
+    if note.get('1.0', END):
+        savmsg  = messagebox.askokcancel(title= "SAVE FILE",message='save the file before exiting')
+        if savmsg:
+            saveas()
+            root.destroy()
+        else:
+            root.destroy()
+
 
 def saveas():
     try:
@@ -20,11 +33,26 @@ def saveas():
         file.close()
     
 def open():
-    pass
+    if note.get('1.0',END):
+        savmsg  = messagebox.askokcancel(title= "SAVE FILE",message='save the file before exiting')
+        
+        if savmsg:
+            saveas()
+        else:
+
+            try:  
+                file = filedialog.askopenfile(defaultextension='*.txt')
+                note.delete('1.0',END)
+                note.insert('1.0',file.read())
+            except FileNotFoundError:
+                msg = messagebox.askokcancel(title="File cannot open",message= "Check whether the file is existed")
+            except AttributeError:
+                return None
+
+
 def voice():
     pass
-def exit():
-    pass
+
 
 
 
@@ -60,7 +88,7 @@ exitbt.pack(ipadx=1,pady= 10,padx=5,side=RIGHT)
 
 # ========================== Text area =====================
 
-note = Text(master= root,width=300,height = 300,bg='#e3fcbf',fg='#15133c',font=('Segoe UI',12),relief=FLAT,selectbackground='#ffe459',selectforeground='#152d35')
+note = Text(master= root,width=300,height = 300,bg='#e3fcbf',fg='#15133c',font=('Segoe UI',font_size),relief=FLAT,selectbackground='#ffe459',selectforeground='#152d35')
 note.pack(fill='both',ipadx= 15,ipady=10)
 
 
