@@ -44,8 +44,7 @@ def open():
                 note.insert('1.0',file.read())
             except FileNotFoundError:
                 msg = messagebox.askokcancel(title="File cannot open",message= "Check whether the file is existed")
-            except AttributeError:
-                return None
+            
 
 
 def voice():
