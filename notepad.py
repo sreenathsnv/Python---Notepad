@@ -8,9 +8,7 @@ from tkinter import colorchooser
 from turtle import title
 
 
-# =========================== Global Variable=====================
-font_size = 12
-font_color = (colorchooser.askcolor(title = 'Pick a color'))[1]
+
 # ============================Functions=================
 
 def exit():
@@ -53,7 +51,9 @@ def open():
 def voice():
     pass
 
-
+def color():
+    color = colorchooser.askcolor()
+    note.config(fg = color[1])
 
 
 root = Tk()
@@ -61,6 +61,9 @@ root = Tk()
 root.geometry("500x500")
 root.title('Notepad')
 
+# =========================== Global Variable=====================
+
+font_size = 12
 # ========================== Tool area =====================
 tool = Frame(master = root,background = '#bdf2d5',height=70,width=300)
 tool.pack(fill=BOTH,side='top')
@@ -75,6 +78,10 @@ saveasbt = Button(master=tool , background='#ce9461',activebackground='#dea057',
                 )
 saveasbt.pack(ipadx=1,pady= 10,padx=15,side=LEFT)
 
+colorbt = Button(master=tool , background='#ce9461',activebackground='#dea057',text= 'Colour', fg= 'white',
+                width= 10,height = 1,activeforeground= 'white',relief= FLAT,command= color
+                )
+colorbt.pack(ipadx=1,pady= 10,padx=15,side=LEFT)
 
 Voicebt = Button(master=tool , background='#ce9461',activebackground='#dea057',text= 'VOICE..', fg= 'white',
                 width= 10,height = 1,activeforeground= 'white',relief= FLAT,command= voice
@@ -88,7 +95,7 @@ exitbt.pack(ipadx=1,pady= 10,padx=5,side=RIGHT)
 
 # ========================== Text area =====================
 
-note = Text(master= root,width=300,height = 300,bg='#e3fcbf',fg='#15133c',font=('Segoe UI',font_size),relief=FLAT,selectbackground='#ffe459',selectforeground='#152d35')
+note = Text(master= root,width=300,height = 300,bg='#e3fcbf',font=('Segoe UI',font_size),relief=FLAT,selectbackground='#ffe459',selectforeground='#152d35')
 note.pack(fill='both',ipadx= 15,ipady=10)
 
 
